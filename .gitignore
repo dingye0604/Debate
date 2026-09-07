@@ -1,0 +1,22 @@
+.claude/
+**/.runtime/
+**/.runtime-cache/
+**/__pycache__/
+**/data/
+**/test-artifacts/
+**/*.log
+.env
+*.tmp
+**/.playwright-cli/
+**/output/playwright/
+
+**/backups/
+**/release/
+**/update_frontend.py
+
+# Private original materials and credential variants
+/docs/
+/debate.jpg
+**/.env.*
+**/*.pem
+**/*.key

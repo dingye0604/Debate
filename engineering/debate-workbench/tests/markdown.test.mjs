@@ -1,0 +1,15 @@
+import assert from "node:assert/strict";
+import {markdown} from "../static/markdown.mjs";
+const nested=markdown("1. 第一项\n   - 子项\n2. 第二项");
+assert.match(nested, /<ol>/);
+assert.match(nested, /<ul>/);
+assert.match(nested, /第二项/);
+const unsafe=markdown('<script>alert(1)</script>\n\n[x](javascript:alert)\n\n![x](https://example.com/pixel)');
+assert.doesNotMatch(unsafe, /<script|<img|href="javascript:/i);
+assert.match(unsafe, /&lt;script&gt;/);
+const citation=markdown("论据 [S1]",[{id:"S1",url:"https://example.com/report"}]);
+assert.match(citation, /href="https:\/\/example.com\/report"/);
+assert.match(citation, /noopener noreferrer/);
+const table=markdown("|观点|依据|\n|---|---|\n|甲|乙|");
+assert.match(table, /<table>/);
+console.log("Markdown: nested lists, tables, citation links and unsafe content passed.");
